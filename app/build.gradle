@@ -1,0 +1,71 @@
+plugins {
+    id 'com.android.application'
+    //the next 3 plugins are needed to be able to use kotlin in your
+    //project as I have it set up
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.coderzf1.testjavatokotlin'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.coderzf1.testjavatokotlin"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17 //Changed to use VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17' //changed from 1.8 to 17
+    }
+
+    buildFeatures{
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    //core kotlin library
+    //needed for any app that is created using kotlin. REQUIRED
+    implementation 'androidx.core:core-ktx:1.10.1'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    //Kotlin life cycle stuff
+    //*** Makes using ViewModels inside of your app easier
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+
+    //Room Database
+    //*** These dependencies are not needed unless you plan to use SqLite on your device
+    //for storing a database of information.
+    implementation "androidx.room:room-runtime:2.5.2"
+    kapt "androidx.room:room-compiler:2.5.2"
+    implementation "androidx.room:room-ktx:2.5.2"
+
+    //Coroutines
+    //*** Useful for when needing to execute code on a separate thread
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+
+}
